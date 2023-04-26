@@ -1,14 +1,19 @@
-import { TouchableWithoutFeedback, Keyboard } from "react-native";
 import React from "react";
+import { Navigation } from "./Components/Navigation";
 import { NavigationContainer } from "@react-navigation/native";
-import Navigation from "./src/Screens/Navigation/Navigation";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
+import "./firebase/config";
 
 export default function App() {
+  const useRoute = () => {
+    return <Navigation />;
+  };
+
+  const routing = useRoute();
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <NavigationContainer>
-        <Navigation />
-      </NavigationContainer>
-    </TouchableWithoutFeedback>
+    <Provider store={store}>
+      <NavigationContainer>{routing}</NavigationContainer>
+    </Provider>
   );
 }
